@@ -10,6 +10,19 @@ using namespace std;
 
 int main()
 {
+	BinaryTree bts(4);
+	bts.add({ 0 }, 1);
+	bts.add({ 1 }, 10);
+	bts.add({ 0,0 }, 0);
+	bts.add({ 0,1 }, 3);
+	bts.add({ 0,1,0 }, 2);
+	bts.add({ 1,0 }, 5);
+	bts.add({ 1,0,1 }, 6);
+	bts.add({ 1,1}, 11);
+
+	bts.print();
+	//cout << (bts.isBTS() ? "true" : "false") << endl;
+
 	/*BinaryTree tree1(2);
 	tree1.add({ 0 }, 226);
 	BinaryTree tree3(tree1);

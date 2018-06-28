@@ -38,8 +38,8 @@ bool BinaryTree::isPositive() {
 bool BinaryTree::isPositiveR(Node* current) {
 	if (current == 0x0) return true;
 	if (current->value > 0) { 
-		true && isPositiveR(current->left) && isPositiveR(current->right); 
-	}
+		return true && isPositiveR(current->left) && isPositiveR(current->right); 
+	} 
 	else return false;
 }
 
@@ -96,6 +96,7 @@ std::vector<int> BinaryTree::find(int value) {
 	if (findR(root, way, value)) {
 		return way;
 	}
+	return {};
 }
 
 bool BinaryTree::findR(Node* current, std::vector<int> &sequence, int value) {
@@ -213,4 +214,45 @@ bool equalsR(const BinaryTree::Node* left, const BinaryTree::Node* right) {
 	return	(left->value == right->value) &&
 			(equalsR(left->left, right->left)) &&
 			(equalsR(left->right, right->right));
+}
+
+// public
+bool BinaryTree::isBTS() {
+	return isBTSR(root, INT_MIN, INT_MAX);
+}
+// private
+bool BinaryTree::isBTSR(Node* current, int min, int max) {
+	if (current == 0x0) return true;
+	if (current->value < min || current->value >= max) return false;
+	return	
+		isBTSR(current->left, min, current->value) &&
+		isBTSR(current->right, current->value, max);
+}
+
+// public
+void BinaryTree::print() {
+	return printR(root, 0);
+}
+// private
+void BinaryTree::printR(Node* current, int level) {
+	// выводит дерево как в методичке
+	if (current != 0x0) {
+		for (int i = 0; i < level; i++) {
+			std::cout << "\t";
+		}
+		std::cout << current->value << std::endl;
+		printR(current->right, ++level);
+		--level;
+		printR(current->left, ++level);
+	}
+	// выводит дерево
+	/*if (current != 0x0) {
+		printR(current->right, ++level);
+		--level;
+		for (int i = 0; i < level; i++) {
+			std::cout << "\t";
+		}
+		std::cout << current->value << std::endl;
+		printR(current->left, ++level);
+	}*/
 }

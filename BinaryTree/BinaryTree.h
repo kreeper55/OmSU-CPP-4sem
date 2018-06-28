@@ -46,6 +46,9 @@ public:
 	void clear();
 	void copy(const BinaryTree& tree);
 
+	bool isBTS();
+	void print();
+
 	~BinaryTree();
 private:
 	struct Node {
@@ -72,5 +75,7 @@ private:
 	Node* copyR(Node* root);
 	void stolenR(BinaryTree& tree);
 	//sam delal
-};
 
+	bool isBTSR(Node* root, int min, int max);
+	void printR(Node* root, int level);
+};

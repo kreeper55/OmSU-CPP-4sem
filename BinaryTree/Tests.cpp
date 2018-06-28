@@ -9,7 +9,7 @@ bool equals(std::vector<int>& vec1, std::vector<int>& vec2) {
 	if (vec1.size() != vec2.size()) {
 		return false;
 	}
-	for (int i = 0; i < vec1.size(); i++) {
+	for (size_t i = 0; i < vec1.size(); i++) {
 		if (vec1[i] != vec2[i]) {
 			return false;
 		}
@@ -173,6 +173,68 @@ namespace TestBinaryTree
 			tree1.add({}, 5);
 			Assert::IsTrue(tree1 == tree2);
 		}
+		TEST_METHOD(TDeleteAllLeaves) {
+			BinaryTree orig;
+			orig.add({ 0 }, 1);
+			orig.add({ 1 }, 2);
+			orig.add({ 0,0 }, 3);
+			orig.add({ 0,1 }, 4);
+			orig.add({ 1,0 }, 5);
+			orig.add({ 1,1 }, 6);
+			orig.add({ 0,0,0 }, 7);
+			orig.add({ 0,0,1 }, 8);
+			orig.add({ 1,0,1 }, 9);
 
+
+			BinaryTree tree(0);
+			tree.add({ 0 }, 1);
+			tree.add({ 1 }, 2);
+			tree.add({ 0,0 }, 3);
+			tree.add({ 1,0 }, 5);
+
+			orig.deleteAllLeaves();
+			Assert::IsTrue(orig == tree);
+		}
+		TEST_METHOD(TisBinaryTreeSearch) {
+			BinaryTree bts(4);
+			bts.add({ 0 }, 1);
+			bts.add({ 1 }, 10);
+			bts.add({ 0,0 }, 0);
+			bts.add({ 0,1 }, 3);
+			bts.add({ 0,1,0 }, 2);
+			bts.add({ 1,0 }, 5);
+			bts.add({ 1,0,1 }, 6);
+			bts.add({ 1,1 }, 11);
+			Assert::IsTrue(bts.isBTS());
+
+			BinaryTree bts4;
+			Assert::IsTrue(bts4.isBTS());
+
+			BinaryTree bts2(10);
+			bts2.add({ 0 }, 9);
+			bts2.add({ 1 }, 7);
+			bts2.add({ 0,0 }, 4);
+			Assert::IsFalse(bts2.isBTS());
+
+			BinaryTree bts3(3);
+			bts3.add({ 0 }, 0);
+			bts3.add({ 1 }, 40);
+			bts3.add({ 1,1 }, 6);
+			bts3.add({ 0,1 }, 5);
+			Assert::IsFalse(bts3.isBTS());
+		}
 	};
 }
+/*
+			  0
+		1			2
+	 3	   4     5     6
+   7   8           9
+*/
+
+/*
+			0
+		1		2
+	3			5	
+				
+*/
