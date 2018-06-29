@@ -27,9 +27,21 @@ namespace TestBinaryTree
 			BinaryTree tree(1);
 			tree.add({ 0 }, 1);
 			tree.add({ 1 }, 2);
-			tree.add({ 10 }, 3);
-			tree.add({ 11 }, 4);
-			tree.add({ 10 }, 999);
+			tree.add({ 1, 0 }, 3);
+			tree.add({ 1, 1 }, 4);
+			tree.add({ 1, 0 }, 999);
+			std::vector<int> v;
+			v.push_back(1); v.push_back(1);
+			Assert::IsTrue(equals(v, tree.find(4)));
+
+			std::vector<int> v2;
+			v2.push_back(1); v2.push_back(0);
+			Assert::IsTrue(equals(v2, tree.find(999)));
+		}
+		TEST_METHOD(TAddExceptions) {
+
+			BinaryTree tree(1);
+			tree.add({ 0 }, 1);
 
 			Assert::ExpectException<InvalidWayTreeException>([&]
 			{

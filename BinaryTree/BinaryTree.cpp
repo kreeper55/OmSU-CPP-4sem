@@ -79,6 +79,7 @@ bool BinaryTree::deleteAllLeavesR(Node*& current) {
 	if (current == 0x0) return false;
 	if (current->left == 0x0 && current->right == 0x0) {
 		delete current;
+		current = 0x0;
 		return true;
 	}
 	else {
@@ -159,6 +160,8 @@ BinaryTree::~BinaryTree() {
 
 // public
 void BinaryTree::add(const std::vector<int> sequence, int value) {
+	if (root == 0x0) root = new Node;
+	if (sequence.empty()) root->value = value;
 	if (addR(sequence, value, 0, root))
 		return;
 }
